@@ -15,6 +15,27 @@ function create_user(){
     sudo service sshd restart
 }
 
+function wait_until_cloud_finish_check_for_user_bash_profile(){
+        echo '
+until [ ! -f /tmp/cloud-init-running.txt ]
+do
+    clear;
+    echo "CLOUD INIT still running $(date +"%r")"
+    sleep 1
+done
+    ' >> "/home/$NEWUSER/.bashrc"
+    chown -R $NEWUSER "/home/$NEWUSER/.bashrc"
+    echo '
+until [ ! -f /tmp/cloud-init-running.txt ]
+do
+    clear;
+    echo "CLOUD INIT still running $(date +"%r")"
+    sleep 1
+done
+    ' >> "/home/$NEWUSER/.bash_profile"
+    chown -R $NEWUSER "/home/$NEWUSER/.bash_profile"
+}
+
 function install_essential(){
     echo "==================================== install_absolute_essential() ===================================="
     sudo apt update
@@ -34,6 +55,7 @@ function install_essential(){
 
     # install system toolss
     sudo apt install -y snap htop btop
+    sudo snap install starship
 }
 
 function ssh_config(){
@@ -81,6 +103,7 @@ function install_profile(){
 }
 
 create_user;
+wait_until_cloud_finish_check_for_user_bash_profile;
 install_essential;
 ssh_config;
 configure_ssh_ftp;
