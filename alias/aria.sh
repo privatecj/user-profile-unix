@@ -1,0 +1,1 @@
+alias aria="aria2c -x 8 -s 8 "

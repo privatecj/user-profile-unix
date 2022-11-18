@@ -1,0 +1,1 @@
+alias notes="cd ~/Dropbox/notes/"

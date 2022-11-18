@@ -1,0 +1,67 @@
+{
+    "settings": [
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "@",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "nginx",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "emby",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "speedtest",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "speedtrack",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "sonarr",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "prowlarr",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "radarr",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      },
+      {
+        "provider": "namecheap",
+        "domain": "cjcj.in",
+        "host": "maven",
+        "password": "74db68743ae744c3b091184ca9ae3d12",
+        "provider_ip": true
+      }
+    ]
+  }

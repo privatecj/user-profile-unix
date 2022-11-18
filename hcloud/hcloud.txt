@@ -1,0 +1,29 @@
+List All Running Servers
+hcloud server list
+
+List All Running Servers and only id,name column
+hcloud server list -o columns=id,name
+
+List Server Types
+hcloud server-type list
+
+Describe Server
+hcloud server describe {id}
+
+Create a Server
+hcloud server create --name test --image 15512617 --type cpx21
+
+Shutdown Server
+hcloud server shutdown 14582295
+
+PowerOff Server
+hcloud server poweroff 14582295
+
+Delete a Server
+hcloud server delete 14581309
+
+List Images and Snapshots
+hcloud image list
+
+Create Image from Server
+hcloud server create-image --type=snapshot --description test-snapshot 14583004

@@ -1,0 +1,1 @@
+alias fswatch='watch -n 1 cat /proc/sys/fs/file-nr'

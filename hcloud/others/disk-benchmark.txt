@@ -1,0 +1,1 @@
+fio --name=fiotest --filename=~/fio --size=16Gb --rw=randread --bs=8K --direct=1 --numjobs=8 --ioengine=libaio --iodepth=32 --group_reporting --runtime=60 --startdelay=60 

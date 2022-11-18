@@ -1,0 +1,1 @@
+find $SCRIPT_ROOT_DIR"/ssh_keys/" -type f -exec grep -l "PRIVATE" {} \; | xargs ssh-add &> /dev/null
