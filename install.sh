@@ -8,6 +8,50 @@ ADDUSER="${ADDUSER:-cj}"
 echo "As User: "$ADDUSER
 echo ""
 
-if [[ $OSTYPE == "linux-gnu" ]]; then
-    bash $SCRIPT_ROOT_DIR/install-linux-profile.sh
+
+function install_linux_profile() {
+    echo "
+    source ~/mydrive/user-profile/linux-init.sh
+    " >> "/home/$NEWUSER/.bashrc"
+        
+    echo "
+    if [ -f ~/.bashrc ]; then 
+        source ~/.bashrc 
+    fi
+    " >> "~/.bash_profile"
+        
+    touch ~/.user-profile-installed
+    echo "installed linux profile"
+}
+
+function install_mac_profile() {
+    echo "
+    source ~/mydrive/user-profile/mac-init.sh
+    " >> "/home/$NEWUSER/.bashrc"
+        
+    echo "
+    if [ -f ~/.bashrc ]; then 
+        source ~/.bashrc 
+    fi
+    " >> "~/.bash_profile"
+        
+    touch ~/.user-profile-installed
+    echo "installed linux profile"
+}
+
+function install_profile(){
+    if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+        install_linux_profile;
+    elif [[ "$OSTYPE" == "darwin"* ]]; then
+        install_mac_profile
+    fi
+}
+
+FILE=~/.user-profile-installed
+if ! test -f "$FILE"; then
+    echo "installing user profile"
+    install_profile;
 fi
+
+
+
