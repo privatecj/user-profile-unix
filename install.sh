@@ -50,6 +50,8 @@ FILE=~/.user-profile-installed
 if ! test -f "$FILE"; then
     echo "installing user profile"
     install_profile;
+else
+    echo "user profile already installed. skipping installtion"
 fi
 
 
