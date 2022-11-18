@@ -14,11 +14,11 @@ function install_linux_profile() {
     source $HOME/mydrive/user-profile/linux-init.sh
     " >> "$HOME/.bashrc"
         
-    echo "
-    if [ -f $HOME/.bashrc ]; then 
-        source $HOME/.bashrc 
-    fi
-    " >> "$HOME/.bash_profile"
+    # echo "
+    # if [ -f $HOME/.bashrc ]; then 
+    #     source $HOME/.bashrc 
+    # fi
+    # " >> "$HOME/.bash_profile"
         
     touch $HOME/.user-profile-installed
     echo "installed linux profile"
@@ -29,11 +29,11 @@ function install_mac_profile() {
     source $HOME/mydrive/user-profile/mac-init.sh
     " >> "$HOME/.bashrc"
         
-    echo "
-    if [ -f $HOME/.bashrc ]; then 
-        source $HOME/.bashrc 
-    fi
-    " >> "$HOME/.bash_profile"
+    # echo "
+    # if [ -f $HOME/.bashrc ]; then 
+    #     source $HOME/.bashrc 
+    # fi
+    # " >> "$HOME/.bash_profile"
         
     touch $HOME/.user-profile-installed
     echo "installed linux profile"
@@ -54,6 +54,3 @@ if ! test -f "$FILE"; then
 else
     echo "user profile already installed. skipping installtion"
 fi
-
-
-

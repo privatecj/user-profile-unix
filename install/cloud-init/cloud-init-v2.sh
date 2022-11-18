@@ -15,25 +15,31 @@ function create_user(){
     sudo service sshd restart
 }
 
-function wait_until_cloud_finish_check_for_user_bash_profile(){
-        echo '
-until [ ! -f /tmp/cloud-init-running.txt ]
-do
-    clear;
-    echo "CLOUD INIT still running $(date +"%r")"
-    sleep 1
-done
-    ' >> "/home/$NEWUSER/.bashrc"
-    chown -R $NEWUSER "/home/$NEWUSER/.bashrc"
+function init_bash_files(){
+    export NEWUSER=cj;
+    rm /home/$NEWUSER/.bashrc
+    rm /home/$NEWUSER/.bash_profile
+    rm /home/$NEWUSER/.profile
+    touch /home/$NEWUSER/.bashrc
+    touch /home/$NEWUSER/.bash_profile
+    touch /home/$NEWUSER/.profile
+
     echo '
-until [ ! -f /tmp/cloud-init-running.txt ]
-do
-    clear;
-    echo "CLOUD INIT still running $(date +"%r")"
-    sleep 1
-done
-    ' >> "/home/$NEWUSER/.bash_profile"
-    chown -R $NEWUSER "/home/$NEWUSER/.bash_profile"
+    if [ -f ~/.bashrc ];
+    then 
+        .  ~/.bashrc; 
+    fi 
+    export PATH
+    ' >> /home/$NEWUSER/.bash_profile
+
+    echo '
+    until [ ! -f /tmp/cloud-init-running.txt ]
+    do
+        clear;
+        echo "CLOUD INIT still running $(date +"%r")"
+        sleep 1
+    done
+    ' >> "/home/$NEWUSER/.bashrc"
 }
 
 function install_essential(){
@@ -103,6 +109,7 @@ function install_profile(){
 }
 
 create_user;
+init_bash_files;
 wait_until_cloud_finish_check_for_user_bash_profile;
 install_essential;
 ssh_config;
