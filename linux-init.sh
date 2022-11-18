@@ -16,10 +16,10 @@ export SCRIPT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1
 for f in $SCRIPT_ROOT_DIR/alias/*.sh; do source $f; done
 
 # add execute permission to all scripts
-for file in "$(find $SCRIPT_ROOT_DIR"/install" -maxdepth 10 -name '*' -print)"; do chown -R $(whoami) $file; done
+for file in "$(find $SCRIPT_ROOT_DIR"/linux-install-scripts" -maxdepth 10 -name '*' -print)"; do chown -R $(whoami) $file; done
 
 # add all script dirs to path
-PATH=$PATH$( find $SCRIPT_ROOT_DIR"/install" -type d -printf ":%p" )
+PATH=$PATH$( find $SCRIPT_ROOT_DIR"/linux-install-scripts" -type d -printf ":%p" )
 export PATH
 
 

@@ -2,10 +2,11 @@
 export NEWUSER=cj;
 
 touch /tmp/cloud-init-running.txt
+chmod 777 /var/log/cloud-init-output.log
 
 function create_user(){
-    echo "==================================== create_user_cj() ===================================="
-    echo "Creating User $NEWUSER. Who am I: "$USER    
+    log "Creating User $NEWUSER"
+
     sudo useradd $NEWUSER -s /bin/bash -m -g sudo
     echo "$NEWUSER:code" > /tmp/pass123
     sudo chpasswd < /tmp/pass123
@@ -16,6 +17,8 @@ function create_user(){
 }
 
 function init_bash_files(){
+    log "Initilizing bash files for User $NEWUSER"
+
     export NEWUSER=cj;
     rm /home/$NEWUSER/.bashrc
     rm /home/$NEWUSER/.bash_profile
@@ -36,45 +39,61 @@ function init_bash_files(){
     until [ ! -f /tmp/cloud-init-running.txt ]
     do
         clear;
+        echo "========================================================"
         echo "CLOUD INIT still running $(date +"%r")"
-        sleep 1
+        echo "========================================================"
+        echo ""
+        echo ""
+        tail -n 60 /var/log/cloud-init-output.log
+        sleep 3
     done
+
+    if test -f "/tmp/cloud-init-finished.txt"; then
+        rm -f /tmp/cloud-init-finished.txt
+        source ~/.bashrc
+    fi
     ' >> "/home/$NEWUSER/.bashrc"
 }
 
 function install_essential(){
-    echo "==================================== install_absolute_essential() ===================================="
-    
-    sudo apt update
+    log "updating apt cache"    
+    sudo apt-get update
 
+    log "upgrading distro"
     sudo apt-get install unattended-upgrades
 
     # install file tools
+    log "installing file tools"
     sudo apt-get install -y zip unzip unrar-free tar dos2unix file
 
     # install internet tools
+    log "installing internet tools"
     sudo apt-get install -y wget curl aria2 speedtest-cli
 
     # install network tools
+    log "installing network tools"
     sudo apt-get install -y mosh vsftpd openssh-server iperf net-tools
 
     # install dev tools
+    log "installing dev tools"
     sudo apt-get install -y neofetch git podman 
 
-    # install system toolss
-    sudo apt install -y snap htop btop
+    # install system tools
+    log "installing system tools"
+    sudo apt install -y snapd htop btop
     sudo snap install starship
 }
 
 function ssh_config(){
+    log "configuring ssh"
     # Enable password authentication for ssh
     sudo sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
     echo "MaxAuthTries 50" | sudo tee -a /etc/ssh/sshd_config
 }
 
 function configure_ssh_ftp(){
-    echo "==================================== configure_ssh_ftp() ===================================="
-    echo "Configuring SSH and FTP. Who am I: "$USER
+    log "configuring ftp"
+
     echo "write_enable=YES" | sudo tee -a /etc/vsftpd.conf
     sudo systemctl enable vsftpd
     sudo systemctl start vsftpd
@@ -83,6 +102,8 @@ function configure_ssh_ftp(){
 }
 
 function setup_dir_layout(){
+    log "creating directory layout"
+
     mkdir -p /home/$NEWUSER/mydrive/gsync
     mkdir -p /home/$NEWUSER/mydrive/dsync
     mkdir -p /home/$NEWUSER/mydrive/apps-data
@@ -106,24 +127,36 @@ function download_profile(){
 }
 
 function install_profile(){
+    log "installing user profile"
+
     cd /home/$NEWUSER/mydrive/user-profile
     sudo -H -u cj bash ./install.sh
 }
 
 function install_docker(){
+    log "installing docker"
+
     curl -fsSL https://get.docker.com -o get-docker.sh
     sh get-docker.sh
     sudo groupadd docker
-    sudo usermod -aG docker $USER
+    sudo usermod -aG docker $NEWUSER
 }
 
 function install_java(){
-    curl -s "https://get.sdkman.io" | bash -o get-sdkman.sh
+    log "installing java"
+
+    curl -s "https://get.sdkman.io" -o get-sdkman.sh
     bash get-sdkman.sh
     source "/home/$USER/.sdkman/bin/sdkman-init.sh"
     sdk i java 17.0.5-zulu
     sdk i maven
     sdk i gradle
+}
+
+function log(){
+    echo ""
+    echo ">>>>>>>>>>>>>>>>>>>>>>>>> $1 <<<<<<<<<<<<<<<<<<<<<<<<<"
+    echo ""
 }
 
 create_user;
@@ -139,3 +172,4 @@ install_java;
 
 rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt
+chown -R $NEWUSER /tmp/cloud-init-finished.txt

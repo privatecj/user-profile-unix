@@ -19,10 +19,6 @@ sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plu
 
 sudo groupadd docker
 sudo usermod -aG docker $USER
-newgrp docker
-
-sudo service docker start
-sudo docker run hello-world
 
 mkdir ~/.docker
 touch ~/.docker/config.json
