@@ -77,7 +77,7 @@ function download_profile(){
 
 function install_profile(){
     cd /home/$NEWUSER/mydrive/user-profile
-    sudo -H -u cj bash user.sh ./install.sh
+    sudo -H -u cj bash ./install.sh
 }
 
 create_user;
@@ -87,7 +87,6 @@ configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
-
 
 rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt

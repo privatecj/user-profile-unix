@@ -4,15 +4,14 @@ echo "Starting BASH SHELL"
 ## Detect current script location and user name 
 SCRIPT_ROOT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 echo "Script Root DIR: "$SCRIPT_ROOT_DIR
-ADDUSER="${ADDUSER:-cj}"
-echo "As User: "$ADDUSER
+echo "As User: "$USER
 echo ""
 
 
 function install_linux_profile() {
     echo "
     source ~/mydrive/user-profile/linux-init.sh
-    " >> "/home/$NEWUSER/.bashrc"
+    " >> "~/.bashrc"
         
     echo "
     if [ -f ~/.bashrc ]; then 
@@ -27,7 +26,7 @@ function install_linux_profile() {
 function install_mac_profile() {
     echo "
     source ~/mydrive/user-profile/mac-init.sh
-    " >> "/home/$NEWUSER/.bashrc"
+    " >> "~/.bashrc"
         
     echo "
     if [ -f ~/.bashrc ]; then 
