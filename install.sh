@@ -7,7 +7,7 @@ echo "Script Root DIR: "$SCRIPT_ROOT_DIR
 echo "As User: "$USER
 cd ~
 pwd;
-echo ""
+echo "$HOME"
 
 
 function install_linux_profile() {
