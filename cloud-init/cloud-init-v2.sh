@@ -73,28 +73,13 @@ function install_essential(){
     log "updating apt cache"    
     sudo apt-get update
 
-    log "upgrading distro"
     sudo apt-get install unattended-upgrades
+            zip unzip unrar-free tar dos2unix file \
+            wget curl aria2 speedtest-cli \
+            mosh vsftpd openssh-server iperf net-tools \
+            neofetch git podman \
+            snapd htop btop
 
-    # install file tools
-    log "installing file tools"
-    sudo apt-get install -y zip unzip unrar-free tar dos2unix file
-
-    # install internet tools
-    log "installing internet tools"
-    sudo apt-get install -y wget curl aria2 speedtest-cli
-
-    # install network tools
-    log "installing network tools"
-    sudo apt-get install -y mosh vsftpd openssh-server iperf net-tools
-
-    # install dev tools
-    log "installing dev tools"
-    sudo apt-get install -y neofetch git podman
-
-    # install system tools
-    log "installing system tools"
-    sudo apt install -y snapd htop btop
     sudo snap install starship
 }
 
