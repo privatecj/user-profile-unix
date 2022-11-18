@@ -44,7 +44,9 @@ function init_bash_files(){
 
 function install_essential(){
     echo "==================================== install_absolute_essential() ===================================="
+    
     sudo apt update
+
     sudo apt-get install unattended-upgrades
 
     # install file tools
@@ -108,15 +110,32 @@ function install_profile(){
     sudo -H -u cj bash ./install.sh
 }
 
+function install_docker(){
+    curl -fsSL https://get.docker.com -o get-docker.sh
+    sh get-docker.sh
+    sudo groupadd docker
+    sudo usermod -aG docker $USER
+}
+
+function install_java(){
+    curl -s "https://get.sdkman.io" | bash -o get-sdkman.sh
+    bash get-sdkman.sh
+    source "/home/$USER/.sdkman/bin/sdkman-init.sh"
+    sdk i java 17.0.5-zulu
+    sdk i maven
+    sdk i gradle
+}
+
 create_user;
 init_bash_files;
-wait_until_cloud_finish_check_for_user_bash_profile;
 install_essential;
 ssh_config;
 configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
+install_docker;
+install_java;
 
 rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt
