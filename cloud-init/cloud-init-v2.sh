@@ -4,6 +4,8 @@ export NEWUSER=cj;
 touch /tmp/cloud-init-running.txt
 chmod 777 /var/log/cloud-init-output.log
 
+alias apt-get="apt-get -q -y"
+
 function create_user(){
     log "Creating User $NEWUSER"
 
@@ -13,6 +15,18 @@ function create_user(){
     rm /tmp/pass123
     sudo adduser $NEWUSER sudo
     echo "$NEWUSER ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+    sudo service sshd restart
+}
+
+function create_user_sync(){
+    log "Creating User Sync"
+
+    sudo useradd syn -s /bin/bash -m -g sudo
+    echo "syn:code" > /tmp/pass123
+    sudo chpasswd < /tmp/pass123
+    rm /tmp/pass123
+    sudo adduser syn sudo
+    echo "syn ALL=(ALL:ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
     sudo service sshd restart
 }
 
@@ -76,7 +90,7 @@ function install_essential(){
 
     # install dev tools
     log "installing dev tools"
-    sudo apt-get install -y neofetch git podman 
+    sudo apt-get install -y neofetch git podman
 
     # install system tools
     log "installing system tools"
@@ -145,12 +159,7 @@ function install_docker(){
 function install_java(){
     log "installing java"
 
-    curl -s "https://get.sdkman.io" -o get-sdkman.sh
-    bash get-sdkman.sh
-    source "/home/$USER/.sdkman/bin/sdkman-init.sh"
-    sdk i java 17.0.5-zulu
-    sdk i maven
-    sdk i gradle
+    sudo -H -u cj bash /home/$NEWUSER/mydrive/user-profile/linux-install-scripts/in-java.sh
 }
 
 function log(){
@@ -160,6 +169,7 @@ function log(){
 }
 
 create_user;
+create_user_sync;
 init_bash_files;
 install_essential;
 ssh_config;
@@ -167,7 +177,7 @@ configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
-install_docker;
+# install_docker;
 install_java;
 
 rm /tmp/cloud-init-running.txt

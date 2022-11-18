@@ -6,14 +6,8 @@ function download_profile(){
     popd
 }
 
-function install_profile(){
-    cd /home/$USER/mydrive/user-profile
-    ./install.sh
-}
-
 function r { 
-    echo $SCRIPT_ROOT_DIR
-    source $SCRIPT_ROOT_DIR"/linux-init.sh"; 
+    source ~/.bashrc
 }
 
 function rr(){
