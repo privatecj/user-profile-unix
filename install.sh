@@ -9,34 +9,35 @@ cd ~
 pwd;
 echo "$HOME"
 
+rm $HOME/.user-profile-installed
 
 function install_linux_profile() {
     echo "
-    source ~/mydrive/user-profile/linux-init.sh
-    " >> "~/.bashrc"
+    source $HOME/mydrive/user-profile/linux-init.sh
+    " >> "$HOME/.bashrc"
         
     echo "
-    if [ -f ~/.bashrc ]; then 
-        source ~/.bashrc 
+    if [ -f $HOME/.bashrc ]; then 
+        source $HOME/.bashrc 
     fi
-    " >> "~/.bash_profile"
+    " >> "$HOME/.bash_profile"
         
-    touch ~/.user-profile-installed
+    touch $HOME/.user-profile-installed
     echo "installed linux profile"
 }
 
 function install_mac_profile() {
     echo "
-    source ~/mydrive/user-profile/mac-init.sh
-    " >> "~/.bashrc"
+    source $HOME/mydrive/user-profile/mac-init.sh
+    " >> "$HOME/.bashrc"
         
     echo "
-    if [ -f ~/.bashrc ]; then 
-        source ~/.bashrc 
+    if [ -f $HOME/.bashrc ]; then 
+        source $HOME/.bashrc 
     fi
-    " >> "~/.bash_profile"
+    " >> "$HOME/.bash_profile"
         
-    touch ~/.user-profile-installed
+    touch $HOME/.user-profile-installed
     echo "installed linux profile"
 }
 
