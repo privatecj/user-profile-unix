@@ -73,12 +73,12 @@ function install_essential(){
     log "updating apt cache"    
     sudo apt-get update
 
-    sudo apt-get install unattended-upgrades
+    sudo apt-get install -y unattended-upgrades \
             zip unzip unrar-free tar dos2unix file \
             wget curl aria2 speedtest-cli \
             mosh vsftpd openssh-server iperf net-tools \
             neofetch git podman \
-            snapd htop btop
+            snapd htop btop sysstat
 
     sudo snap install starship
 }
