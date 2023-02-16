@@ -77,7 +77,7 @@ function install_essential(){
             zip unzip unrar-free tar dos2unix file \
             wget curl aria2 speedtest-cli \
             mosh vsftpd openssh-server iperf net-tools \
-            neofetch git podman \
+            neofetch git \
             snapd htop btop sysstat
 
     sudo snap install starship
@@ -162,7 +162,7 @@ configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
-# install_docker;
+install_docker;
 install_java;
 
 rm /tmp/cloud-init-running.txt

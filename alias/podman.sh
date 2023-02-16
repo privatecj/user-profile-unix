@@ -1,1 +1,1 @@
-alias docker=podman
+# alias docker=podman
