@@ -135,10 +135,9 @@ function install_profile(){
 function install_docker(){
     log "installing docker"
 
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    sh get-docker.sh
-    sudo groupadd docker
-    sudo usermod -aG docker $NEWUSER
+    sudo bash /home/$NEWUSER/mydrive/user-profile/linux-install-scripts/in-docker.sh
+
+    sudo reboot
 }
 
 function install_java(){
@@ -162,9 +161,10 @@ configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
-install_docker;
 install_java;
 
 rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt
 chown -R $NEWUSER /tmp/cloud-init-finished.txt
+
+install_docker;
