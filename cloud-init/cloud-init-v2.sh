@@ -167,4 +167,4 @@ rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt
 chown -R $NEWUSER /tmp/cloud-init-finished.txt
 
-install_docker;
+# install_docker;

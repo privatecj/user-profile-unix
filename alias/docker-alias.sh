@@ -1,3 +1,4 @@
+alias docker="sudo docker"
 alias dc="docker "
 
 alias dcls="docker ps -a"
