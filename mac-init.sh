@@ -19,7 +19,7 @@ for f in $SCRIPT_ROOT_DIR/alias/*.sh; do source $f; done
 for file in "$(find $SCRIPT_ROOT_DIR"/mac-install-scripts" -maxdepth 10 -name '*' -print)"; do chown -R $(whoami) $file; done
 
 # add all script dirs to path
-PATH=$PATH$( find $SCRIPT_ROOT_DIR"/mac-install-scripts" -type d -printf ":%p" )
+PATH=$PATH$( find $SCRIPT_ROOT_DIR"/mac-install-scripts" -type d -exec echo {} \; )
 export PATH
 
 

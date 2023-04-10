@@ -4,6 +4,7 @@ alias gs="git status"
 alias gc="git commit -m "
 alias gc!="git commit --amend -m "
 alias gt="git add .; git commit -m 'temp';"
+alias gtp="git add .; git commit -m 'temp';git push;"
 alias gp="git push;"
 
 function gclean(){
