@@ -8,11 +8,12 @@ alias gtp="git add .; git commit -m 'temp';git push;"
 alias gp="git push;"
 
 function gclean(){
+    branch_name=$(git branch -l master main | sed 's/^* //');
     git reset --hard HEAD
-    git checkout master
+    git checkout $branch_name
     git fetch --all --prune
     git branch -lvv | cut -c3- | awk '/: gone]/ {print $1}' | xargs git branch -D;
-	git checkout master
+	git checkout $branch_name
 	git pull
 }
 

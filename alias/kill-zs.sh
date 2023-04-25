@@ -1,0 +1,1 @@
+alias kz="/Users/a503959/mydrive/user-apps/kill-zscaler/kill-zscaler.sh"

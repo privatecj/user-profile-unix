@@ -2,7 +2,7 @@
 
 echo ""
 echo "==================================="
-echo "  setting up your shell $(whoami)"
+echo "  setting up your shell $(whoami)" on mac
 echo "==================================="
 echo ""
 echo ""
@@ -20,6 +20,9 @@ for file in "$(find $SCRIPT_ROOT_DIR"/mac-install-scripts" -maxdepth 10 -name '*
 
 # add all script dirs to path
 PATH=$PATH$( find $SCRIPT_ROOT_DIR"/mac-install-scripts" -type d -exec echo {} \; )
+# export PATH
+
+PATH=$PATH$( find ~/mydrive/user-apps/ -type d -maxdepth 1 -exec echo {} \; )
 export PATH
 
 
