@@ -1,1 +1,1 @@
-alias kz="/Users/a503959/mydrive/user-apps/kill-zscaler/kill-zscaler.sh"
+alias kz='echo Needtochange\$1 | sudo -S /Users/a503959/mydrive/user-apps/kill-zscaler/kill-zscaler.sh'

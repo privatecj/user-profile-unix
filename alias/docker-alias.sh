@@ -1,7 +1,7 @@
-alias docker="sudo docker"
+alias docker="docker"
 alias dc="docker "
 
-alias dcls="docker ps -a"
+alias dcls='docker ps --format "table {{.ID}}\t\t{{.Names}}\t\t{{.Image}}\t\t{{.Status}}"'
 alias dcst="docker start "
 alias dcsp="docker stop "
 alias dcrm="docker rm -f "

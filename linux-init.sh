@@ -19,9 +19,10 @@ for f in $SCRIPT_ROOT_DIR/alias/*.sh; do source $f; done
 for file in "$(find $SCRIPT_ROOT_DIR"/linux-install-scripts" -maxdepth 10 -name '*' -print)"; do chown -R $(whoami) $file; done
 
 # add all script dirs to path
-PATH=$PATH$( find $SCRIPT_ROOT_DIR"/linux-install-scripts" -type d -printf ":%p" )
-export PATH
+export PATH=$PATH:$( find $SCRIPT_ROOT_DIR"/linux-install-scripts" -type d -printf ":%p" )
 
 
 # source $SCRIPT_ROOT_DIR"/common/start-ssh-agent.sh"
 # source $SCRIPT_ROOT_DIR"/common/add-all-ssh-keys.sh"
+
+

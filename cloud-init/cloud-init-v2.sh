@@ -80,7 +80,7 @@ function install_essential(){
             neofetch git \
             snapd htop btop sysstat
 
-    sudo snap install starship
+    sudo snap install --candidate starship
 }
 
 function ssh_config(){
@@ -161,10 +161,8 @@ configure_ssh_ftp;
 setup_dir_layout;
 download_profile;
 install_profile;
-install_java;
+# install_java;
 
 rm /tmp/cloud-init-running.txt
 touch /tmp/cloud-init-finished.txt
 chown -R $NEWUSER /tmp/cloud-init-finished.txt
-
-# install_docker;
